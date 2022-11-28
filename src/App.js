@@ -1,11 +1,11 @@
 import "./App.css";
+import Header from "./components/Header";
 import './index.css';
 
 function App() {
   return (
-    <div className="w-screen h-screen flex items-center justify-center text-blue-600">
-      <div>Hello</div>
-      <h1>sj</h1>
+    <div className="w-screen h-auto flex flex-col">
+      <Header />
     </div>
   );
 }
