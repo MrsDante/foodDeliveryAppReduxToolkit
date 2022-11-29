@@ -12,7 +12,7 @@ const Header = () => {
               <p className="text-headingColor text-xl font-bold">Город</p>
           </div>
           
-          <div className="flex items-center">
+          <div className="flex items-center gap-8">
             <ul className="flex items-center gap-8">
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">Home</li>
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">Menu</li>
@@ -21,7 +21,7 @@ const Header = () => {
             </ul>
 
             <div c   lassName="relative flex items-center justify-center">
-                <BsBasket className="text-textColor text-2xl ml-8 cursor-pointer" />
+                <BsBasket className="text-textColor text-2xl cursor-pointer" />
                 <div className="absolute top-4 right-16 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
                     <p className="text-xs text-white font-semibold">2</p>
                 </div>
