@@ -1,20 +1,39 @@
 import React from 'react';
 import Logo from '../img/logo.png';
 import { BsBasket } from 'react-icons/bs';
+import { MdAdd, MdLogout } from 'react-icons/md';
 import Avatar from '../img/avatar.png';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../firebase.config';
+import { useStateValue } from '../context/StateProvider';
+import { actionType } from '../context/reducer';
+
+
 const Header = () => {
 
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
+  const [{user}, dispatch] = useStateValue();
+
   const handleLogin = async () => {
-    const response = await signInWithPopup(firebaseAuth, provider);
-    console.log(response)
-    alert(response)
+    /*const { user: {refreshToken, providerData} } = await signInWithPopup(firebaseAuth, provider);
+    dispatch({
+        type: actionType.SET_USER,
+        user: providerData[0],
+    });
+    localStorage.setItem('user', JSON.stringify(providerData[0]));*/
+
+    if (!user) {
+      const { user: {refreshToken, providerData} } = await signInWithPopup(firebaseAuth, provider);
+      dispatch({
+        type: actionType.SET_USER,
+        user: providerData[0],
+      });
+      localStorage.setItem('user', JSON.stringify(providerData[0]));
+    }
   }
 
   return (
@@ -44,9 +63,14 @@ const Header = () => {
             <div className="relative">
               <motion.img whileTap={{ scale: 0.6}}
                 alt="avatar" 
-                src={Avatar} 
-                className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl cursor-pointer"
-                onClick={handleLogin} />
+                src={user ? user.photoURL : Avatar} 
+                className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl cursor-pointer rounded-full"
+                onClick={handleLogin} 
+                />
+              <div className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0 px-4 py-2">
+                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transitial-all duration-100 ease-in-out">New Item <MdAdd /></p>
+                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transitial-all duration-100 ease-in-out">Logout <MdLogout /></p>
+              </div>
             </div>
 
           </div>
