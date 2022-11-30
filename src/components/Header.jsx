@@ -68,8 +68,14 @@ const Header = () => {
                 onClick={handleLogin} 
                 />
               <div className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0">
-                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transitial-all duration-100 ease-in-out text-textColor text-base">New Item <MdAdd /></p>
-                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transitial-all duration-100 ease-in-out text-textColor text-base">Logout <MdLogout /></p>
+                {
+                    user && user.email === 'sharapova.anastasiiya@gmail.com' && (
+                    <Link to={'/createItem'}>
+                      <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transitial-all duration-100 ease-in-out text-textColor text-base">New Item <MdAdd /></p>
+                    </Link>
+                    )
+                }
+                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transitial-all duration-100 ease-in-out text-textColor text-base">Logout <MdLogout /></p>
               </div>
             </div>
 
