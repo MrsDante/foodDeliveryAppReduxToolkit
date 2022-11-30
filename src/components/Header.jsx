@@ -67,9 +67,9 @@ const Header = () => {
                 className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl cursor-pointer rounded-full"
                 onClick={handleLogin} 
                 />
-              <div className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0 px-4 py-2">
-                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transitial-all duration-100 ease-in-out">New Item <MdAdd /></p>
-                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transitial-all duration-100 ease-in-out">Logout <MdLogout /></p>
+              <div className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0">
+                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transitial-all duration-100 ease-in-out text-textColor text-base">New Item <MdAdd /></p>
+                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transitial-all duration-100 ease-in-out text-textColor text-base">Logout <MdLogout /></p>
               </div>
             </div>
 
