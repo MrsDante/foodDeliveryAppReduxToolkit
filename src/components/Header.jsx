@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../img/logo.png';
 import { BsBasket } from 'react-icons/bs';
 import { MdAdd, MdLogout } from 'react-icons/md';
@@ -18,6 +18,8 @@ const Header = () => {
 
   const [{user}, dispatch] = useStateValue();
 
+  const [isMenu, setIsMenu] = useState(false);
+
   const handleLogin = async () => {
     /*const { user: {refreshToken, providerData} } = await signInWithPopup(firebaseAuth, provider);
     dispatch({
@@ -33,6 +35,8 @@ const Header = () => {
         user: providerData[0],
       });
       localStorage.setItem('user', JSON.stringify(providerData[0]));
+    } else {
+        setIsMenu(!isMenu);
     }
   }
 
@@ -46,12 +50,16 @@ const Header = () => {
           </Link>
           
           <div className="flex items-center gap-8">
-            <ul className="flex items-center gap-8">
+            <motion.ul
+              initial={{opacity : 0, x : 200}}
+              animate={{opacity : 1, x : 0}}
+              exit={{opacity : 0, x : 200}}
+              className="flex items-center gap-8">
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">Home</li>
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">Menu</li>
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">About us</li>
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">Service</li>
-            </ul>
+            </motion.ul>
 
             <div className="relative flex items-center justify-center">
                 <BsBasket className="text-textColor text-2xl cursor-pointer" />
@@ -67,16 +75,26 @@ const Header = () => {
                 className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl cursor-pointer rounded-full"
                 onClick={handleLogin} 
                 />
-              <div className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0">
+                
                 {
-                    user && user.email === 'sharapova.anastasiiya@gmail.com' && (
-                    <Link to={'/createItem'}>
-                      <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transitial-all duration-100 ease-in-out text-textColor text-base">New Item <MdAdd /></p>
-                    </Link>
+                    isMenu && (
+                        <motion.div initial={{opacity : 0, scale: 0.6}}
+                                    animate={{opacity : 1, scale: 1}}
+                                    exit={{opacity : 0, scale: 0.6}}
+                                    className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0">
+                        {
+                            user && user.email === 'sharapova.anastasiiya@gmail.com' && (
+                            <Link to={'/createItem'}>
+                              <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transitial-all duration-100 ease-in-out text-textColor text-base">New Item <MdAdd /></p>
+                            </Link>
+                            )
+                        }
+                        <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transitial-all duration-100 ease-in-out text-textColor text-base">Logout <MdLogout /></p>
+                      </motion.div>
                     )
                 }
-                <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transitial-all duration-100 ease-in-out text-textColor text-base">Logout <MdLogout /></p>
-              </div>
+
+
             </div>
 
           </div>
